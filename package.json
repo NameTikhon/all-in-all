@@ -1,0 +1,12 @@
+{
+  "name": "all-in-all",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Локальный помощник для переводного Дурака: память карт, вероятности и объяснимые советы",
+  "type": "module",
+  "engines": { "node": ">=22.0.0" },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test"
+  }
+}
