@@ -1,0 +1,199 @@
+/* The position editor is the first action: choose visible cards, then analyse. */
+.topbar { height: 62px; }
+.page-header { padding: 25px 0 23px; }
+.page-header h1 { font-size: clamp(30px, 3vw, 40px); margin-bottom: 10px; }
+.page-header .eyebrow { margin-bottom: 8px; }
+.page-header p { font-size: 12px; }
+.dashboard-grid { grid-template-columns: minmax(0, 1.35fr) minmax(310px, 1fr); grid-template-areas: "position advice" "capture memory"; }
+.position-panel { grid-area: position; }
+.advice-panel { grid-area: advice; min-height: 0; }
+.capture-panel { grid-area: capture; }
+.memory-panel { grid-area: memory; }
+.panel h2 { font-size: 14px; }
+.panel-heading { padding-top: 18px; padding-bottom: 18px; }
+.primary-button, .secondary-button, .chip-button, .text-button { font-size: 12px; }
+.primary-button, .secondary-button { min-height: 40px; }
+.chip-button { min-height: 36px; padding: 7px 10px; }
+.round-actions > span { font-size: 11px; }
+.cards-row-label h3, .memory-section h3 { font-size: 12px; }
+.cards-row-label h3 span, .memory-section h3 span, .cards-row-label > span { font-size: 11px; }
+.position-stat span { font-size: 10px; }
+.position-stats { padding-bottom: 15px; }
+.position-stat b { font-size: 17px; }
+.saved-indicator { font-size: 10px; }
+.cards-area, .table-area { padding-top: 17px; padding-bottom: 17px; }
+.hand-cards, .table-cards { min-height: 70px; }
+.zone-empty, .mini-cards .zone-empty { color: #9bb3b9; font-size: 12px; }
+
+.quick-setup { margin: 0 23px 18px; padding: 13px 15px; background: #1c3735; border: 1px solid #365b50; border-radius: 10px; }
+.quick-setup p { margin: 0; font-size: 12px; line-height: 1.65; color: #c1dbcf; }
+.quick-setup strong, .quick-setup b { color: #e5f3e7; }
+.inline-guidance { color: #b3c9c8; font-size: 12px; line-height: 1.65; margin: 10px 0 0; }
+.visual-config { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 0 23px 18px; }
+.visual-field { min-width: 0; display: flex; flex-direction: column; gap: 7px; color: #b1c5c6; font-size: 12px; }
+.visual-field > span:first-child, .visual-field > label { font-size: 11px; color: #99b0b6; }
+.visual-field > select, .visual-field > button { width: 100%; min-height: 42px; }
+.visual-field select { border: 1px solid #3b525d; border-radius: 7px; background: #101f29; color: #e0e8e1; padding: 9px 11px; font-size: 13px; }
+.visual-field small { font-size: 11px; color: #8ea8ae; line-height: 1.5; }
+.counter-control { display: grid; grid-template-columns: 40px minmax(0, 1fr) 40px; align-items: stretch; height: 42px; border: 1px solid #3b525d; border-radius: 7px; overflow: hidden; background: #101f29; }
+.counter-control button { border: 0; background: #203640; color: #c9dfd4; font-size: 23px; line-height: 1; padding: 0; }
+.counter-control button:hover:not(:disabled) { background: #315249; }
+.counter-control output { display: grid; place-items: center; font-size: 17px; color: #f0f2e9; font-variant-numeric: tabular-nums; }
+.counter-control input { appearance: textfield; text-align: center; border: 0; border-radius: 0; padding: 6px; min-width: 0; }
+.counter-control input::-webkit-inner-spin-button { appearance: none; }
+.quick-apply { position: fixed; z-index: 15; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: space-between; gap: 14px; width: min(500px, calc(100% - 32px)); padding: 11px 13px; background: #213f39; color: #d6e9dc; border: 1px solid #7aa08a; border-radius: 12px; box-shadow: 0 8px 30px #0007; font-size: 12px; }
+.quick-apply[hidden] { display: none; }
+.quick-apply .primary-button { font-size: 11px; white-space: normal; }
+.record-move-button { white-space: normal; text-align: center; margin-top: 14px; }
+.table-slot.empty small { display: block; font-size: 9px; margin-top: 3px; }
+.stock-readout { display: flex; flex-wrap: wrap; align-items: center; gap: 3px 9px; min-height: 42px; padding: 8px 11px; border: 1px solid #344d52; background: #142c30; border-radius: 7px; }
+.stock-readout .stock-total { font-size: 20px; line-height: 1.2; color: #c8e8d7; font-variant-numeric: tabular-nums; }
+.stock-readout small { flex: 1 1 120px; color: #b1c6c4; font-size: 11px; }
+.card-zone-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.zone-select-button, .add-card-button, .empty-zone-button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 38px; border: 1px solid #4c7566; border-radius: 7px; padding: 8px 11px; background: #1d3835; color: #c7e8d6; font-size: 12px; font-weight: 500; }
+.zone-select-button:hover:not(:disabled), .add-card-button:hover:not(:disabled), .empty-zone-button:hover:not(:disabled) { background: #2b4b41; border-color: #8ebfa4; }
+.card-zone-actions .text-button { padding: 8px 6px; color: #9bb2b4; }
+.empty-zone-button { border-style: dashed; width: 100%; min-height: 73px; background: #152c30; color: #bbd5c9; }
+.clickable-card { appearance: none; border: 0; padding: 0; margin: 0; background: transparent; color: inherit; border-radius: 5px; text-align: left; line-height: inherit; }
+.clickable-card:hover:not(:disabled) .playing-card { box-shadow: 0 0 0 2px #91d8bc, 0 5px 12px #06101666; }
+.clickable-card .playing-card { pointer-events: none; }
+.clickable-card:focus-visible { outline-offset: 4px; }
+.table-edit-pair { display: flex; align-items: center; gap: 6px; border: 1px solid #2d454f; border-radius: 9px; padding: 8px; background: #132730; }
+.table-slot { border: 0; padding: 0; background: transparent; border-radius: 5px; }
+.table-slot .playing-card { width: 46px; height: 68px; }
+.table-slot.empty { width: 46px; min-height: 68px; border: 1px dashed #5c7f7c; color: #a9c8bb; font-size: 11px; padding: 3px; background: #1a3336; }
+.table-slot.empty:hover { background: #28483f; }
+.table-remove { align-self: flex-start; width: 25px; min-height: 27px; padding: 0; border: 0; border-radius: 5px; background: transparent; color: #91a7ad; font-size: 19px; }
+.table-remove:hover { color: #e9b2a0; background: #493332; }
+.draft-toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; padding: 14px 23px; border-top: 1px solid #30474f; background: #192e34; }
+.draft-toolbar > span, .draft-toolbar p { margin: 0; font-size: 12px; line-height: 1.5; color: #bfd2c6; }
+.draft-toolbar .primary-button { margin-left: auto; }
+.advanced-editor { border-top: 1px solid var(--border); }
+.advanced-editor > summary { padding: 16px 23px; color: #a9c0c0; font-size: 12px; cursor: pointer; }
+.editor-details > summary, .editor-intro, .checkbox-field { font-size: 12px; }
+.editor-details > summary > span { font-size: 10px; }
+.field, .modal .field { font-size: 12px; }
+.field input, .field select, .field textarea { font-size: 13px; min-height: 42px; }
+.field input::placeholder, .field textarea::placeholder { font-size: 12px; }
+.form-footer > span, .form-footer .text-button, .form-footer .primary-button { font-size: 11px; }
+.validation-errors { font-size: 12px; }
+
+/* Four suit rows keep the complete deck visible without a text entry format. */
+.card-picker-modal { width: min(820px, calc(100% - 28px)); max-width: 820px; padding: 23px; max-height: min(94dvh, 850px); overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; }
+.picker-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 14px; }
+.picker-heading h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: 28px; line-height: 1.2; margin: 0 0 7px; color: #f1f3e9; }
+.picker-heading p { font-size: 12px; line-height: 1.6; color: #a9bfc0; margin: 0; }
+.picker-heading .icon-button { min-width: 36px; min-height: 36px; font-size: 25px; }
+.picker-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; border-top: 1px solid #31494f; border-bottom: 1px solid #31494f; padding: 10px 0; margin-bottom: 16px; }
+.picker-count { font-size: 12px; line-height: 1.5; color: #cee1d5; }
+.picker-clear { border: 0; border-radius: 5px; background: transparent; color: #b7cec8; padding: 8px 5px; min-height: 36px; font-size: 12px; }
+.picker-clear:hover:not(:disabled) { color: #e9f2e6; background: #223e40; }
+.picker-suits { display: flex; flex-direction: column; gap: 10px; }
+.picker-suit-row { display: grid; grid-template-columns: 57px minmax(0, 1fr); gap: 10px; align-items: center; }
+.picker-suit-label { font-size: 11px; color: #a9bdbf; line-height: 1.4; }
+.picker-suit-label > span { display: block; font-family: Georgia, serif; font-size: 26px; line-height: 1.3; color: #deeadf; }
+.picker-suit-label.red, .picker-suit-label.red > span { color: #f29a89; }
+.picker-cards { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 7px; min-width: 0; }
+.pick-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; width: 100%; min-width: 0; height: 75px; padding: 4px 2px; border: 1px solid #d3d8ca; border-radius: 6px; background: #f3f0e5; color: #213a3d; box-shadow: 0 2px 3px #06151e66; font-family: Georgia, "Times New Roman", serif; user-select: none; }
+.pick-rank { font-size: 21px; font-weight: 700; line-height: 1.2; }
+.pick-suit { font-size: 29px; line-height: 1.1; }
+.pick-card.red { color: #b74c42; }
+.pick-card:hover:not(:disabled) { background: #fffdf3; transform: translateY(-2px); border-color: #a2e0ba; box-shadow: 0 0 0 2px #91d8bc6b, 0 4px 8px #06151e66; }
+.pick-card.selected, .pick-card[aria-pressed="true"] { border-color: #a6e4bf; background: #d8edda; box-shadow: 0 0 0 2px #91d8bc; }
+.pick-card.selected::after, .pick-card[aria-pressed="true"]::after { content: "✓"; position: absolute; display: grid; place-items: center; top: -5px; right: -4px; width: 19px; height: 19px; border: 2px solid #162731; border-radius: 50%; background: #a5e1bd; color: #153b2f; font: 700 11px "Segoe UI", sans-serif; }
+.pick-card.unavailable, .pick-card:disabled { opacity: 1; box-shadow: none; border-color: #41535a; background: #253741; color: #84969d; cursor: not-allowed; }
+.pick-card.unavailable.red, .pick-card.red:disabled { color: #b78d88; }
+.pick-card small { font: 9px/1.3 "Segoe UI", sans-serif; text-align: center; color: #a2b3b9; white-space: nowrap; }
+.pick-card:focus-visible { outline: 2px solid #bee8cd; outline-offset: 4px; z-index: 1; }
+.picker-selected { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 43px; padding: 15px 0 6px; color: #9bb5b6; font-size: 12px; }
+.picker-selection-chip { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 4px 8px; border: 1px solid #bccfc1; border-radius: 5px; background: #e9eddf; color: #233b3a; font: 700 14px/1.3 Georgia, serif; }
+.picker-selection-chip.red { color: #af443d; }
+.picker-selection-chip:hover { background: #fffdf2; border-color: #a5dfba; }
+.picker-selection-chip .remove-icon { font: 16px/1 "Segoe UI", sans-serif; color: #5b6f65; padding-left: 3px; }
+.picker-instruction { color: #9eb8b7; font-size: 12px; line-height: 1.65; margin: 10px 0; }
+.picker-error { border: 1px solid #8a6151; background: #422f2a; border-radius: 7px; padding: 10px 12px; color: #f1c7b5; font-size: 12px; line-height: 1.6; margin: 12px 0; }
+.picker-footer { position: sticky; bottom: -23px; display: flex; justify-content: flex-end; align-items: center; gap: 12px; padding: 15px 0 4px; margin-top: 10px; background: #162731; border-top: 1px solid #31494f; z-index: 2; }
+.picker-footer .primary-button { min-width: 118px; }
+.picker-footer > span, .picker-footer p { margin: 0 auto 0 0; color: #a3bdb7; font-size: 12px; }
+button:disabled { opacity: .5; }
+.pick-card:disabled { opacity: 1; }
+select:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--jade); outline-offset: 2px; }
+
+@media (max-width: 1180px) {
+  .dashboard-grid { grid-template-columns: minmax(0, 1.2fr) minmax(290px, 1fr); }
+  .quick-setup { margin-left: 18px; margin-right: 18px; }
+  .visual-config, .draft-toolbar { padding-left: 18px; padding-right: 18px; }
+}
+@media (max-width: 1000px) {
+  .dashboard-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "position" "advice" "capture" "memory"; }
+  .position-panel, .advice-panel, .capture-panel, .memory-panel { order: initial; }
+  .page-header { padding-top: 23px; }
+  .page-header h1 { font-size: 34px; }
+  .screen-stage { aspect-ratio: 2; min-height: 220px; }
+  .advice-panel { min-height: 0; }
+  .saved-indicator { display: block; }
+}
+@media (max-width: 760px) {
+  .topbar { height: 54px; }
+  .page-header { padding: 21px 0; }
+  .page-header h1 { font-size: 31px; }
+  .page-header p { font-size: 11px; }
+  .quick-setup { margin-left: 21px; margin-right: 21px; }
+  .visual-config, .draft-toolbar { padding-left: 21px; padding-right: 21px; }
+  .position-stats { margin-left: 21px; margin-right: 21px; }
+  .cards-row-label { flex-wrap: wrap; }
+  .card-picker-modal { width: calc(100% - 20px); padding: 18px; max-height: 95dvh; }
+  .picker-suit-row { grid-template-columns: 36px minmax(0, 1fr); gap: 7px; }
+  .picker-suit-label { font-size: 9px; }
+  .picker-suit-label > span { font-size: 24px; }
+  .picker-cards { gap: 4px; }
+  .pick-card { height: 67px; }
+  .pick-rank { font-size: 19px; }
+  .pick-suit { font-size: 27px; }
+  .picker-footer { bottom: -18px; }
+}
+@media (max-width: 520px) {
+  .page-header h1 { font-size: 29px; }
+  .top-actions { gap: 12px; }
+  .topbar .text-button { font-size: 11px; }
+  .position-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .position-stat { padding-left: 0; border: 0; }
+  .visual-config { gap: 13px 10px; }
+  .counter-control { grid-template-columns: 36px minmax(0, 1fr) 36px; }
+  .card-picker-modal { width: calc(100% - 16px); padding: 12px; border-radius: 12px; scrollbar-gutter: auto; }
+  .picker-heading h2 { font-size: 24px; }
+  .picker-heading p { font-size: 12px; }
+  .picker-suits { gap: 9px; }
+  .picker-suit-row { grid-template-columns: minmax(0, 1fr); gap: 5px; }
+  .picker-suit-label { display: flex; align-items: center; gap: 6px; font-size: 11px; }
+  .picker-suit-label > span { display: inline; font-size: 17px; line-height: 1; }
+  .picker-cards { gap: 3px; }
+  .pick-card { height: 58px; border-radius: 5px; }
+  .pick-rank { font-size: 18px; }
+  .pick-suit { font-size: 25px; }
+  .pick-card small { font-size: 8px; letter-spacing: -.2px; }
+  .pick-card.selected::after, .pick-card[aria-pressed="true"]::after { width: 16px; height: 16px; top: -4px; right: -3px; font-size: 9px; }
+  .picker-footer { bottom: -12px; padding-bottom: 5px; }
+  .picker-footer .primary-button { min-width: 104px; }
+  .picker-selected { display: none; }
+  .quick-setup { padding: 11px 12px; }
+  .saved-indicator { display: none; }
+}
+@media (max-width: 390px) {
+  .card-picker-modal { width: calc(100% - 8px); padding: 8px; }
+  .picker-cards { gap: 1px; }
+  .pick-card { min-width: 0; height: 58px; }
+  .pick-rank { font-size: 17px; }
+  .pick-suit { font-size: 24px; }
+  .picker-heading { gap: 7px; }
+  .picker-heading h2 { font-size: 22px; }
+  .picker-footer { bottom: -8px; }
+  .picker-toolbar { margin-bottom: 11px; padding: 7px 0; }
+  .picker-count, .picker-clear, .picker-instruction { font-size: 11px; }
+  .quick-setup, .position-stats { margin-left: 15px; margin-right: 15px; }
+  .cards-area, .table-area, .visual-config, .draft-toolbar { padding-left: 15px; padding-right: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pick-card, .clickable-card, .zone-select-button { transition: none; }
+  .pick-card:hover:not(:disabled) { transform: none; }
+}

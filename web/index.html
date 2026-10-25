@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101c27">
+  <title>ALL IN ALL — помощник по дураку</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./editor.css">
+  <link rel="stylesheet" href="./modes.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#" aria-label="ALL IN ALL — главная"><span class="brand-mark">a<span>i</span>a<span class="brand-dot">.</span></span><span>ALL IN ALL<small>ВИДЕТЬ ДАЛЬШЕ</small></span></a>
+    <div class="nav-label">ВАШИ ИГРЫ</div>
+    <nav aria-label="Игры">
+      <a class="nav-item active" href="#workspace"><span class="nav-icon">♠</span><span>Дурак<small>Переводной · 36 карт</small></span><span class="nav-arrow">↗</span></a>
+      <div class="nav-item disabled"><span class="nav-icon">♦</span><span>Покер</span><span class="soon">скоро</span></div>
+      <div class="nav-item disabled"><span class="nav-icon">♣</span><span>Блэкджек</span><span class="soon">скоро</span></div>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="sidebar-note"><span class="tiny-star">✧</span><p>Хороший ход начинается<br>с полной картины.</p><span>Карты, память и вероятности<br>в одном месте.</span></div>
+      <button class="help-link" id="help-button"><span>ⓘ</span> Как это работает</button>
+      <div class="prototype">ЛОКАЛЬНЫЙ ПРОТОТИП <span>v0.1</span></div>
+    </div>
+  </aside>
+
+  <main id="workspace">
+    <div class="topbar"><span class="local-status"><i></i> Локальное приложение</span><div class="top-actions"><button id="import-button" class="text-button">Импорт</button><button id="export-button" class="text-button">Экспорт <span aria-hidden="true">↗</span></button><span class="top-divider"></span><button id="reset-button" class="text-button">Новая партия <span aria-hidden="true">＋</span></button></div></div>
+    <header class="page-header"><div><div class="eyebrow">ВАШ ПАРТНЁР ЗА ИГРОВЫМ СТОЛОМ</div><h1>Ваш следующий ход —<br><span>с расчётом.</span></h1><p>Следите за картами. Понимайте расклад. Выбирайте осознанно.</p></div><div class="game-tag"><span class="tag-symbol">♠</span><div>Переводной дурак<small>36 карт <span>·</span> один на один</small></div></div></header>
+
+    <div id="demo-banner" class="demo-banner" hidden><div><span class="demo-badge">ДЕМО</span> Здесь пример позиции. Подключите окно и внесите свою партию.</div><button id="start-button">Очистить пример <span>↗</span></button></div>
+    <div id="notice" class="notice" role="status" hidden></div>
+
+    <div class="dashboard-grid">
+      <section class="panel capture-panel" aria-labelledby="capture-title">
+        <div class="panel-heading"><div><span class="section-number">01</span><h2 id="capture-title">Ваш игровой стол</h2></div><span class="status-pill" id="capture-status">ОКНО НЕ ВЫБРАНО</span></div>
+        <div class="screen-stage" id="screen-stage"><div class="screen-placeholder" id="screen-placeholder"><div class="placeholder-cards" aria-hidden="true"><span class="back-card back-one"></span><span class="back-card back-two"></span><span class="face-card"><b>A</b><i>♠</i><b>A</b></span></div><h3>Вся игра — перед глазами</h3><p>Выберите окно с игрой или вкладку браузера.<br>Управлять картами можно и вручную.</p><button id="capture-button" class="primary-button"><span aria-hidden="true">▣</span> Выбрать окно</button></div><video id="screen-video" autoplay playsinline muted hidden aria-label="Предпросмотр выбранного окна"></video><div class="screen-live-label" id="screen-live-label" hidden><i></i> ПРЕДПРОСМОТР</div></div>
+        <div class="capture-footer"><div><span class="privacy-icon">⌑</span><p>Демонстрация остаётся на вашем устройстве.<small>Для распознавания отправляется только выбранный вами кадр в OpenAI.</small></p></div><button id="stop-button" class="secondary-button compact" hidden>Остановить</button></div>
+        <div class="vision-controls"><div><b>Распознать текущий кадр</b><p id="vision-config">Проверяем подключение распознавания…</p></div><button id="recognize-button" class="secondary-button" disabled><span aria-hidden="true">✧</span> Распознать</button></div>
+      </section>
+
+      <section class="panel advice-panel" aria-labelledby="advice-title"><div class="panel-heading"><div><span class="section-number">02</span><h2 id="advice-title">Следующий ход</h2></div><span class="ai-label">АНАЛИЗ ПОЗИЦИИ</span></div><div id="advice-content" aria-live="polite"></div><div class="advice-footnote">Оценка хода — эвристика, а не вероятность победы. Скрытые карты распределены равномерно с учётом известных.</div></section>
+
+      <section class="panel position-panel" aria-labelledby="position-title"><div class="panel-heading"><div><span class="section-number">03</span><h2 id="position-title">Текущая позиция</h2></div><div class="position-heading-actions"><span class="saved-indicator" id="saved-indicator">Сохранено на устройстве</span><button id="edit-button" class="text-button accent">Изменить <span>↗</span></button></div></div>
+        <div class="position-stats" id="position-stats"></div><div class="cards-area"><div class="cards-row-label"><h3>Ваши карты <span id="hand-count"></span></h3><span id="turn-label"></span></div><div id="hand-cards" class="hand-cards"></div></div><div class="table-area"><div class="cards-row-label"><h3>На столе <span id="table-count"></span></h3><span>Атака → защита</span></div><div id="table-cards" class="table-cards"></div></div>
+        <div class="round-actions"><span>Завершить взятку</span><button id="discard-button" class="chip-button">В отбой</button><button id="opponent-took-button" class="chip-button">Соперник взял</button><button id="i-took-button" class="chip-button">Я взял</button><button id="undo-button" class="text-button undo-button" disabled>↶ Отменить</button></div>
+        <details id="editor-details" class="editor-details"><summary>Редактор позиции <span>Все данные можно поправить вручную</span></summary><form id="position-form" novalidate><div class="editor-intro">Формат карты: <code>6C</code>, <code>10D</code>, <code>QH</code>, <code>AS</code>. Масти: C ♣ · D ♦ · H ♥ · S ♠. Разделяйте карты пробелами или запятыми.</div><div class="form-grid"><label class="field full">Карты в вашей руке<input id="field-hand" name="hand" autocomplete="off" spellcheck="false" placeholder="6C, 9C, 10D, QH, KS, AS"></label><label class="field full">Карты на столе: атака > защита; следующая пара<input id="field-table" name="table" autocomplete="off" spellcheck="false" placeholder="8C > 9C; QH"></label><label class="field">Козырная масть<select id="field-trumpSuit" name="trumpSuit"><option value="H">♥ Червы</option><option value="D">♦ Бубны</option><option value="C">♣ Трефы</option><option value="S">♠ Пики</option></select></label><label class="field">Открытый козырь<input id="field-trumpCard" name="trumpCard" autocomplete="off" spellcheck="false" placeholder="6H или пусто"></label><label class="field">Ваш ход<select id="field-role" name="role"><option value="defend">Защищаться</option><option value="attack">Атаковать / подкидывать</option></select></label><label class="field">Карт у соперника<input id="field-opponentCount" name="opponentCount" type="number" min="0" max="36" step="1"></label><label class="field">Карт в колоде<input id="field-stockCount" name="stockCount" type="number" min="0" max="36" step="1"></label><label class="field">Лимит карт в атаке<select id="field-attackLimit" name="attackLimit"><option value="6">6 карт</option><option value="5">5 карт</option><option value="4">4 карты</option><option value="3">3 карты</option><option value="2">2 карты</option><option value="1">1 карта</option><option value="0">0 карт</option></select></label><label class="field">Отбой<textarea id="field-discard" name="discard" rows="2" spellcheck="false" placeholder="Карты, которые точно вышли из игры"></textarea></label><label class="field">Известные карты соперника<textarea id="field-knownOpponent" name="knownOpponent" rows="2" spellcheck="false" placeholder="Например, карты, которые он взял"></textarea></label></div><label class="checkbox-field"><input id="field-allowTransfer" name="allowTransfer" type="checkbox"> Разрешён перевод (в том числе в первой взятке)</label><div id="form-errors" class="validation-errors" role="alert" hidden></div><div class="form-footer"><span id="draft-label">Данные сохранены локально</span><button id="cancel-edit-button" type="button" class="text-button">Сбросить правки</button><button type="submit" class="primary-button">Применить позицию <span>↗</span></button></div></form></details>
+      </section>
+
+      <section class="panel memory-panel" aria-labelledby="memory-title"><div class="panel-heading"><div><span class="section-number">04</span><h2 id="memory-title">Память игры</h2></div><span class="memory-count" id="memory-count"></span></div><div class="memory-section"><h3>У соперника <span id="known-opponent-count"></span></h3><div id="opponent-cards" class="mini-cards"></div></div><div class="memory-section"><h3>Вышли из игры <span id="discard-count"></span></h3><div id="discard-cards" class="mini-cards"></div></div><div id="probability-stats" class="probability-stats"></div><p class="memory-note">Память пополняется только после вашего подтверждения. Исчезновение карты из кадра не означает отбой.</p></section>
+    </div>
+    <footer class="page-footer"><span>ALL IN ALL</span><p>Видеть больше. Решать лучше.</p><span>ПЕРЕВОДНОЙ · 36 · 1 × 1</span></footer>
+  </main>
+
+  <dialog id="vision-dialog" class="modal"><div class="modal-heading"><div><span class="eyebrow">ПРОВЕРКА РАСПОЗНАВАНИЯ</span><h2>Сначала проверьте карты</h2></div><button class="icon-button" id="close-vision-button" aria-label="Закрыть">×</button></div><p>Распознавание может ошибаться. Исправьте данные ниже и подтвердите обновление. Память отбоя и карт соперника сохраняется.</p><div id="vision-confidence" class="vision-confidence"></div><label class="field">Распознанная позиция (JSON)<textarea id="vision-json" rows="13" spellcheck="false" class="json-editor"></textarea></label><p class="small-help">Неизвестные значения <code>null</code> нужно уточнить вручную. Для <code>trumpCard</code> значение <code>null</code> означает, что карта не распознана. Пока колода не пуста, прежний известный козырь сохраняется с уведомлением. Карты в колоде считаются вместе с открытым козырем.</p><button id="prepare-vision-button" class="secondary-button">Проверить позицию</button><div id="vision-review" hidden></div><div id="vision-errors" class="validation-errors" role="alert" hidden></div><div class="modal-footer"><button id="cancel-vision-button" class="text-button">Отмена</button><button id="apply-vision-button" class="primary-button" disabled>Подтвердить и применить</button></div></dialog>
+  <dialog id="help-dialog" class="modal help-modal"><div class="modal-heading"><div><span class="eyebrow">КАК ЭТО РАБОТАЕТ</span><h2>Карты под контролем</h2></div><button class="icon-button" id="close-help-button" aria-label="Закрыть">×</button></div><ol class="help-steps"><li><b>Подключите окно или введите позицию.</b><p>Захват экрана даёт предпросмотр. Распознавание одного кадра запускается отдельной кнопкой и требует серверных настроек OpenAI.</p></li><li><b>Подтвердите то, что видите.</b><p>Исправьте карты, козырь и количество карт. Данные должны описывать полную колоду: 36 карт, включая карты у соперника и в закрытой колоде.</p></li><li><b>Посмотрите варианты хода.</b><p>Помощник оценивает допустимые действия по простой эвристике и считает вероятность того, что у соперника есть подходящая карта. Это не вероятность выигрыша.</p></li><li><b>Обновите память после взятки.</b><p>Укажите, кто взял карты, или отправьте полностью покрытый стол в отбой. Добор из колоды и новый ход нужно внести вручную.</p></li></ol><div class="help-note"><b>Выбранные правила</b><p>Переводной дурак, 36 карт, два игрока. Перевод разрешён с первой взятки. Максимум 6 карт в атаке; для другого варианта укажите лимит 5. Нельзя переводить после начала покрытия. Учитывается вместимость руки принимающего.</p></div><p class="small-help">Сессия сохраняется в этом браузере. Экспорт содержит карты и параметры позиции; изображения экрана в него не входят. Помощник не управляет игрой.</p></dialog>
+  <input id="import-file" type="file" accept=".json,application/json" hidden>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
+
